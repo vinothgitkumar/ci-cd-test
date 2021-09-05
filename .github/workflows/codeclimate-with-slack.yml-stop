@@ -1,0 +1,52 @@
+#CI CD with approval
+name: Python webapplication
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  ci-module:
+    name: Static Code Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run Code Climate
+        uses: erzz/codeclimate-standalone@v0.0.2
+        with:
+          html_report: true
+          info_threshold: 0
+          minor_threshold: 0
+          major_threshold: 0
+          critical_threshold: 0
+          blocker_threshold: 0
+
+  cd-module:
+    name: Static Code Analysis1
+    runs-on: ubuntu-latest
+    environment: 'cd'
+    needs: ci-module
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run Code Climate
+        uses: erzz/codeclimate-standalone@v0.0.2
+        with:
+          html_report: true
+          info_threshold: 0
+          minor_threshold: 0
+          major_threshold: 0
+          critical_threshold: 0
+          blocker_threshold: 0
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: Code Climate Report
+          path: |
+            ./codeclimate-report.html
