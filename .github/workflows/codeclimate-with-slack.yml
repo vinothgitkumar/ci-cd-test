@@ -13,16 +13,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Run Code Climate
-        uses: erzz/codeclimate-standalone@v0.0.2
-        with:
-          html_report: true
-          info_threshold: 0
-          minor_threshold: 0
-          major_threshold: 0
-          critical_threshold: 0
-          blocker_threshold: 0
+        run: |
+          echo "A initial message"
+          ls
+          echo "Another message or command"
+          ls -l
 
   cd-module:
     name: Static Code Analysis1
