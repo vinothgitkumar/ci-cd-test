@@ -18,6 +18,7 @@ jobs:
           ls
           echo "Another message or command"
           ls -l
+          date
 
   cd-module:
     name: Static Code Analysis1
